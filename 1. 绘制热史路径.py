@@ -1,9 +1,9 @@
 import matplotlib.pyplot as plt
 import pandas as pd
 
-
-def read_txt(path,color):
-    t_T = pd.read_csv(path,sep = '\t',encoding='utf-8')
+# 读取数据文件
+def read_txt(path, color):
+    t_T = pd.read_csv(path, sep = '\t', encoding='utf-8')
     plt.plot(t_T['Time (Ma)'],t_T['Temperature (C)'],color = color,linewidth=1)
 
 if __name__ == '__main__':
