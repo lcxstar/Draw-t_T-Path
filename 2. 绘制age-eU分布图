@@ -1,0 +1,44 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+# 需要的数据为eU、age和age_erro，主要使用matplotlib中绘制带误差的散点图功能，数据仅供参考
+Z1_eU = [100, 200, 300, 400, 500, 600]
+Z1_age = [600, 500, 430, 390, 380, 375]
+Z1_age_erro = [10, 20, 30, 20, 10, 15]
+Z2_eU = [100, 200, 300, 400, 500, 600]
+Z2_age = [275, 280, 290, 330, 400, 500]
+Z2_age_erro = [10, 20, 30, 20, 10, 15]
+
+
+def age_eu(age, age_erro, eu, color, fmt, capsize):
+
+    x = np.array(eu)
+    dy = np.array(age_erro)
+    y = np.array(age)
+    # 绘制带误差线的散点图
+    plt.errorbar(x, y, yerr=dy, capsize=capsize, ecolor=color, fmt=fmt, markersize=6)
+
+
+# 调用函数，设置参数：误差线颜色为红色，点的形状为圆形，点的颜色为黑色，误差线两端显示长度为2的横线
+age_eu(Z1_age, Z1_age_erro, Z1_eU, 'red', 'ok', 2)
+age_eu(Z2_age, Z2_age_erro, Z2_eU, 'yellow', 'Db', 2)
+
+# 用列表表示图例，当绘制多组数据时可以在列表中添加
+legend = ['zircon1', 'zircon2']
+plt.legend(legend, fontsize=20)
+# 设置x、y轴字体大小
+plt.xticks(fontsize=15)
+plt.yticks(fontsize=15)
+# 设置x、y轴刻度范围
+plt.xlim(0, 800)
+plt.ylim(0, 800)
+# 设置x、y标签内容及字体大小
+plt.xlabel('eU(ppm)', fontsize=20)
+plt.ylabel('ZHe age(Ma)', fontsize=20)
+# 确保图中内容正常显示
+plt.tight_layout()
+# 显示y轴刻度线
+plt.grid(axis='y')
+# 保存图像
+plt.savefig('age-eU.png', dpi=600)
